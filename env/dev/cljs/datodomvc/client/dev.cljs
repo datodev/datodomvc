@@ -48,6 +48,7 @@
              {:target (sel1 root-node "div.debugger-container")
               :shared {:dato     dato
                        :app-root app-root}
-              :opts   {:expressions todo-debug/watched-expressions}})))
+              :opts   {:expressions todo-debug/watched-expressions
+                       :open?       false}})))
 
 (-main)
