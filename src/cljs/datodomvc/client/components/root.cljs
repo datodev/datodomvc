@@ -5,6 +5,7 @@
             [dato.lib.controller :as con]
             [dato.lib.core :as dato]
             [dato.lib.db :as db]
+            [datodomvc.client.routes :as routes]
             [datodomvc.client.utils :as utils]
             [om.core :as om :include-macros true]
             [om-tools.core :refer-macros [defcomponent]]
@@ -50,6 +51,19 @@
                           [k (db/enum-id db v)]
                           [k v])))
                  (into {}))) results)))
+
+(defmethod con/transition :ui/item-inspected
+  [db {:keys [data] :as args}]
+  (let [session        (dato/local-session db)
+        inspected-type (keyword (name (:type data)))]
+    [{:db/id               (:db/id session)
+      :session/task-filter inspected-type}]))
+
+(defmethod con/effect! :server/find-tasks-succeeded
+  ;; Router is from the context we passed in when instantiating our
+  ;; app in core.cljs
+  [{:keys [router] :as context} old-db new-db exhibit]
+  (routes/start! router))
 
 (defcomponent root-com [data owner opts]
   (display-name [_]
@@ -141,26 +155,26 @@
           [:span.todo-count [:strong (count active-tasks)] " items left"] 
           [:ul.filters
            [:li 
-            [:a {:href     "#/"
+            [:a {:href     (routes/url-for :tasks/all)
                  :class    (when (or (= :all task-filter) (not task-filter)) "selected")
                  :on-click (fn [event]
                              (kill! event)
                              (transact! :filter-updated [{:db/id               (:db/id session)
-                                                          :session/task-filter :all}] {:tx/persist? true}))} "All"]] 
+                                                          :session/task-filter :all}]))} "All"]]
            [:li 
-            [:a {:href     "#/active"
+            [:a {:href     (routes/url-for :tasks/active)
                  :class    (when (= :active task-filter) "selected")
                  :on-click (fn [event]
                              (kill! event)
                              (transact! :filter-updated [{:db/id               (:db/id session)
-                                                          :session/task-filter :active}] {:tx/persist? true}))} "Active"]] 
+                                                          :session/task-filter :active}]))} "Active"]]
            [:li 
-            [:a {:href     "#/completed"
+            [:a {:href     (routes/url-for :tasks/completed)
                  :class    (when (= :completed task-filter) "selected")
                  :on-click (fn [event]
                              (kill! event)
                              (transact! :filter-updated [{:db/id               (:db/id session)
-                                                          :session/task-filter :completed}] {:tx/persist? true}))} "Completed"]]]
+                                                          :session/task-filter :completed}]))} "Completed"]]]
           (when (first completed-tasks)
             [:button.clear-completed
              {:on-click #(transact! :completed-tasks-cleared (->> all-tasks

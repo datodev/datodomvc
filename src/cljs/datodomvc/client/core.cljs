@@ -62,11 +62,10 @@
            ;; Wait until we have the schema and session-id
            (let [[bootstrap-success? session-id] (<! dato-ch)
                  {:keys [r-qes-by]}              @(:ss dato)]
-             (let [ router (routes/make-router dato)]
+             (let [router (routes/make-router dato)]
                (r-qes-by {:name :find-tasks
                           :a    :dato/type
                           :v    :datodomvc.types/task})
                (dato/start-loop! dato {:root container
-                                       ;;:router router
-                                       })))))
+                                       :router router})))))
        app-root))))

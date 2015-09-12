@@ -8,13 +8,12 @@
             [dato.db.utils :as dsu]
             [pushy.core :as pushy]))
 
-(def routes [["/" :all]
-             ["/active" :active]
-             ["/completed" :completed]])
+(def routes ["/" {""          :tasks/all
+                  "active"    :tasks/active
+                  "completed" :tasks/completed}])
 
 (defn parse-url [full-url]
-  (let [[url maybe-query-string] (string/split full-url "?")
-        match                    (bidi/match-route routes url)]
+  (let [[url maybe-query-string] (string/split full-url "?")]
     (bidi/match-route routes url)))
 
 (defn make-route-dispatcher [dato]
