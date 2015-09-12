@@ -1,0 +1,6 @@
+[submodule "vendor/datascript"]
+	path = vendor/datascript
+	url = git@github.com:sgrove/datascript.git
+[submodule "vendor/dato"]
+	path = vendor/dato
+	url = git@github.com:sgrove/dato.git
