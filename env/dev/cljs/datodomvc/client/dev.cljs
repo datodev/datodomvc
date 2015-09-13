@@ -4,7 +4,7 @@
             [figwheel.client :as figwheel :include-macros true]
             [datodomvc.client.core :as datodomvc-core]
             [datodomvc.client.debug :as todo-debug]
-            [datodomvc.client.utils :as utils :refer [sel1]]
+            [datodomvc.client.utils :as utils]
             [om.core :as om]
             [om-i.core :as om-i]
             [om-i.hacks :as om-i-hacks]
@@ -29,26 +29,33 @@
     (js/console.log "Loading DatodoMVC via dev..." utils/initial-query-map)))
 
 (defn -main []
-  (let [root-node (js/document.getElementById "datodomvc-app")
-        app-state datodomvc-core/app-state
-        dato      (:dato @app-state)
-        app-root  (datodomvc-core/-main root-node
-                                        app-state
-                                        {:om-instrument (fn [f cursor m]
-                                                          (let [com (satisfies? om/IDisplayName (f))])
-                                                          (om/build* f cursor
-                                                                     (if (:descriptor m)
-                                                                       m
-                                                                       (assoc m :descriptor
-                                                                              dato-debug/watch-state-methods
-                                                                              ;; TODO: Figure out how to compose these
-                                                                              ;; om-i/instrumentation-methods
-                                                                              ))))})]
-    (om/root dato-debug/history-com (:history dato)
-             {:target (sel1 root-node "div.debugger-container")
-              :shared {:dato     dato
-                       :app-root app-root}
-              :opts   {:expressions todo-debug/watched-expressions
-                       :open?       false}})))
+  (let [root-node     (js/document.getElementById "datodomvc-app")
+        app-state     datodomvc-core/app-state
+        dato          (:dato @app-state)
+        app-root      (datodomvc-core/-main root-node
+                                            app-state
+                                            {:om-instrument (fn [f cursor m]
+                                                              (let [com (satisfies? om/IDisplayName (f))])
+                                                              (om/build* f cursor
+                                                                         (if (:descriptor m)
+                                                                           m
+                                                                           (assoc m :descriptor
+                                                                                  dato-debug/watch-state-methods
+                                                                                  ;; TODO: Figure out how to compose these
+                                                                                  ;; om-i/instrumentation-methods
+                                                                                  ))))})
+        ext-devtools? (:ext-devtools? utils/initial-query-map)
+        win           (doto (.open js/window nil, "dato-devtools", "menubar=no,location=no,resizable=yes,scrollbars=no,status=no")
+                        (.. -location reload))]
+    (js/setTimeout
+     #(om/root dato-debug/history-com (:history dato)
+               {:target (if ext-devtools?
+                          (.. win -document -body)
+                          (utils/sel1 root-node :.debugger-container))
+                :shared {:dato     dato
+                         :app-root app-root}
+                :opts   {:expressions todo-debug/watched-expressions
+                         :open?       true}})
+     10)))
 
 (-main)
