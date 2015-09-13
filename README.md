@@ -10,8 +10,10 @@ This is an implementation of TodoMVC using Datomic on the backend to persist dat
 
 2. Clone this repo
 
+    ```
     git clone git@github.com:sgrove/datodomvc.git
     cd datodomvc
+    ```
 
 3. Start the figwheel server. Figwheel compiles the frontend assets, recompiles them when the files change, and updates the browser with the changed code.
 
