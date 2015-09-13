@@ -95,8 +95,8 @@
                         :port   8080})
   (run-web-server port))
 
-(defn -main [& [port]]
-  (run port))
+(defn init []
+  (run))
 
 (comment
   (do

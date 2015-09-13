@@ -139,7 +139,7 @@
               :css-dirs          ["resources/public/css"]
               :open-file-command "emacsclient"}
 
-   :main ^:skip-aot datodomvc.core
+   :main ^:skip-aot datodomvc.init
 
    :source-paths ["src/" "src/shared/"
                   "vendor/datascript/src" "vendor/datascript/bench/src"

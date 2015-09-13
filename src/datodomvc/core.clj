@@ -1,6 +1,7 @@
-(ns datodomvc.core)
+(ns datodomvc.core
+  (:require [datodomvc.server :as server])
+  (:gen-class))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn -main
+  [& port]
+  (server/run port))
