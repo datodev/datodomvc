@@ -2,7 +2,7 @@
 
 A [TodoMVC](http://todomvc.com/) implementation using [Dato](https://github.com/sgrove/dato), the Clojure/Script Datomic/DataScipt app development framework.
 
-This is an implementation of TodoMVC using Datomic on the backend to persist data that's then fed to DataScript in the frontend. The UI is driven entirely from the DataScript DB (even component local state). See the [Dato Rationale](https://github.com/sgrove/dato#rationale) for more. [Here's a video](https://dl.dropboxusercontent.com/u/412963/dato/dato_todomvc.mp4) of what it looks like once it's running
+This is an implementation of TodoMVC using Datomic on the backend to persist data that's then fed to DataScript in the frontend. The UI is driven entirely from the DataScript DB (even component local state). See the [Dato Rationale](https://github.com/sgrove/dato#rationale) for more. [Here's a video](https://www.youtube.com/watch?v=7bAdBXfZtZU) of what it looks like once it's running
 
 ## Running this demo
 
