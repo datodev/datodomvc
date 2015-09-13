@@ -23,8 +23,25 @@
 (def parsed-uri
   (goog.Uri. (-> (.-location js/window) (.-href))))
 
+(defn uri-param [parsed-uri param-name & [not-found]]
+  (let [v (.getParameterValue parsed-uri param-name)]
+    (cond
+      (= v "")                          [(keyword param-name) not-found]
+      (undefined? v)                    [(keyword param-name) not-found]
+      (= v "true")                      [(keyword (str param-name "?")) true]
+      (= v "false")                     [(keyword (str param-name "?")) false]
+      (= (.toString (js/parseInt v)) v) [(keyword param-name) (js/parseInt v)]
+      (re-matches #"^\d+\.\d*" v)       [(keyword param-name) (js/parseFloat v)]
+      :else                             [(keyword param-name) v])))
+
 (def initial-query-map
-  {})
+  (let [parsed-uri (goog.Uri. (.. js/window -location -href))
+        ks         (.. parsed-uri getQueryData getKeys)
+        defaults   {:ext-devtools? false}
+        initial    (reduce merge {} (map (partial uri-param parsed-uri) (clj->js ks)))
+        ;; Use this if you need to do any fn-based changes, e.g. split on a uri param
+        special    {}]
+    (merge defaults initial special)))
 
 (defn log [& msg]
   (.apply (.-log js/console) js/console (clj->js msg)))
