@@ -67,7 +67,7 @@
 
 (defcomponent root-com [data owner opts]
   (display-name [_]
-    "TodoMVC")
+    "DatodoMVC")
   (did-mount [_]
     (d/listen! (dato/conn (om/get-shared owner :dato)) :dato-root #(om/refresh! owner)))
   (will-unmount [_]
