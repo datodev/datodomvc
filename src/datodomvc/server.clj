@@ -39,9 +39,6 @@
   ;; TODO: Add some authorization here to make sure user is allowed to
   ;; access different version of the js.
   (let [header [:head
-                [:link {:href "/css/vendor/bootstrap/css/bootstrap.min.css" :rel "stylesheet" :type "text/css"}]
-                [:link {:href "/css/vendor/bootstrap/css/bootstrap-theme.min.css" :rel "stylesheet" :type "text/css"}]
-                [:link {:href "/css/style.css" :rel "stylesheet" :type "text/css"}]
                 [:link {:href "/css/base.css" :rel "stylesheet" :type "text/css"}]
                 [:link {:href "/css/index.css" :rel "stylesheet" :type "text/css"}]
                 [:title "Dato • TodoMVC"]]]
