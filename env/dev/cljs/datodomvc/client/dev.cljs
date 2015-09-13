@@ -43,19 +43,11 @@
                                                                                   dato-debug/watch-state-methods
                                                                                   ;; TODO: Figure out how to compose these
                                                                                   ;; om-i/instrumentation-methods
-                                                                                  ))))})
-        ext-devtools? (:ext-devtools? utils/initial-query-map)
-        win           (doto (.open js/window nil, "dato-devtools", "menubar=no,location=no,resizable=yes,scrollbars=no,status=no")
-                        (.. -location reload))]
-    (js/setTimeout
-     #(om/root dato-debug/history-com (:history dato)
-               {:target (if ext-devtools?
-                          (.. win -document -body)
-                          (utils/sel1 root-node :.debugger-container))
-                :shared {:dato     dato
-                         :app-root app-root}
-                :opts   {:expressions todo-debug/watched-expressions
-                         :open?       true}})
-     10)))
+                                                                                  ))))})]
+    (om/root dato-debug/devtools {:dato dato}
+             {:target (utils/sel1 root-node :.debugger-container)
+              :shared {:dato     dato
+                       :app-root app-root}
+              :opts   {:expressions todo-debug/watched-expressions}})))
 
 (-main)

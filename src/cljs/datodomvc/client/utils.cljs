@@ -37,7 +37,7 @@
 (def initial-query-map
   (let [parsed-uri (goog.Uri. (.. js/window -location -href))
         ks         (.. parsed-uri getQueryData getKeys)
-        defaults   {:ext-devtools? false}
+        defaults   {}
         initial    (reduce merge {} (map (partial uri-param parsed-uri) (clj->js ks)))
         ;; Use this if you need to do any fn-based changes, e.g. split on a uri param
         special    {}]
