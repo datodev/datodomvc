@@ -23,7 +23,7 @@ This is an implementation of TodoMVC using Datomic on the backend to persist dat
 4. Start the web server. Export a few environment variables to get things working on your system. The DatodoMVC example uses environ, so you can also define env variables in a local profiles.clj.
 
     ```
-    export DATOMIC_LOCAL_URI="datomic:free://localhost:4334/pc2" # This will depend on your datomic setup
+    export DATOMIC_URI="datomic:free://localhost:4334/pc2" # This will depend on your datomic setup
     export NREPL_PORT=6005 # starts embedded nrepl server
     export DATO_PORT=8081 # 8080 is the default value, change it if there is a port conflict
     export PORT=10556 # 10555 is the default
