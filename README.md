@@ -33,7 +33,7 @@ This is an implementation of TodoMVC using Datomic on the backend to persist dat
 ## Support
 
  * For questions on getting this demo running or modifying it, feel free to open issues on this repo.
- * For overall Dato design issues, please use the [Dato Repo's issue tracker]((https://github.com/sgrove/dato/issues)
+ * For overall Dato design issues, please use the [Dato Repo's issue tracker](https://github.com/sgrove/dato/issues)
  * General questions, I'm on twitter at [@sgrove](https://twitter.com/sgrove)
 
 ## License
