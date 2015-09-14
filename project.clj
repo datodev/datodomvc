@@ -35,6 +35,7 @@
                   [compojure "1.3.1"]
                   ;;[datascript "0.11.6"]
                   [environ "1.0.0"]
+                  [garden "1.3.0-SNAPSHOT"]
                   [hiccup "1.0.5"]
                   [instaparse "1.4.0"]
                   [javax.servlet/servlet-api "2.5"]
