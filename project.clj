@@ -75,7 +75,8 @@
                                                "src/cljs" "src/shared/"
                                                "src/shared/"
                                                "vendor/datascript/src" "vendor/datascript/bench/src"
-                                               "vendor/dato/src/cljs" "vendor/dato/src/shared"]
+                                               "vendor/dato/src/cljs" "vendor/dato/src/shared"
+                                               "vendor/garden/src"]
                                 :figwheel     true
                                 :compiler     {:asset-path    "/js/bin-debug"
                                                :main          datodomvc.client.dev
@@ -91,7 +92,8 @@
                                {:id           "pseudo"
                                 :source-paths ["src/cljs" "src/shared/"
                                                "vendor/datascript/src" "vendor/datascript/bench/src"
-                                               "vendor/dato/src/cljs" "vendor/dato/src/shared"]
+                                               "vendor/dato/src/cljs" "vendor/dato/src/shared"
+                                               "vendor/garden/src"]
                                 :compiler     {:asset-path    "/js/bin-pseudo"
                                                :main          datodomvc.client.production
                                                :output-to     "resources/public/js/bin-pseudo/main.js"
@@ -108,7 +110,8 @@
                                 :source-paths ["env/production/cljs"
                                                "src/cljs" "test/cljs"
                                                "vendor/datascript/src" "vendor/datascript/bench/src"
-                                               "vendor/dato/src/cljs" "vendor/dato/src/shared"]
+                                               "vendor/dato/src/cljs" "vendor/dato/src/shared"
+                                               "vendor/garden/src"]
                                 :compiler     {:pretty-print  true
                                                :output-to     "resources/public/cljs/test/frontend-dev.js"
                                                :output-dir    "resources/public/cljs/test"
@@ -121,7 +124,8 @@
                                 :source-paths ["env/production/cljs"
                                                "src/cljs" "src/shared/"
                                                "vendor/datascript/src" "vendor/datascript/bench/src"
-                                               "vendor/dato/src/cljs" "vendor/dato/src/shared"]
+                                               "vendor/dato/src/cljs" "vendor/dato/src/shared"
+                                               "vendor/garden/src"]
                                 :compiler     {:asset-path    "/js/bin"
                                                :main          datodomvc.client.production
                                                :output-to     "resources/public/js/bin/main.js"
@@ -144,7 +148,8 @@
    :source-paths ["src/" "src/shared/"
                   "vendor/datascript/src" "vendor/datascript/bench/src"
                   "vendor/dato/src"       "vendor/dato/src/shared"
-                  "vendor/dato/src/cljs"]
+                  "vendor/dato/src/cljs"
+                  "vendor/garden/src"]
 
    :target-path "target/%s"
 
