@@ -3,21 +3,17 @@
             [clojure.tools.logging :refer (infof)]
             [clojure.walk :as walk]
             [datomic.api :refer [q] :as d]
-            [environ.core :as config]
+            [datodomvc.config :as config]
             [dato.db.utils :as dsu])
   (:import java.util.UUID))
 
 
-(def remote-uri
-  (or (config/env :datomic-uri)
-      "datomic:sql://datodomvc?jdbc:postgresql://my-remote-server:5432/datodomvc?user=datomic&password=datomic"))
+(def remote-uri (config/datomic-uri))
 
-(def local-uri
-  (or (config/env :datomic-uri)
-      "datomic:sql://datodomvc_dev?jdbc:postgresql://127.0.0.1:5432/datodomvc_dev?user=datomic&password=datomic"))
+(def local-uri (config/datomic-uri))
 
 (def default-uri
-  (if (config/env :is-dev)
+  (if (config/dev?)
     local-uri
     remote-uri))
 
