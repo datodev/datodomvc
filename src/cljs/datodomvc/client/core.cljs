@@ -6,6 +6,7 @@
               [datodomvc.client.components.root :as com-root]
               [datodomvc.client.routes :as routes]
               [datodomvc.client.utils :as utils]
+              [datodomvc.client.config :as config]
               [om.core :as om :include-macros true])
     (:require-macros [cljs.core.async.macros :as async :refer [alt! go go-loop]]))
 
@@ -31,7 +32,8 @@
                   (.. event -pageY)]}))
 
 (defonce ^:export app-state
-  (let [ws-host  (str js/window.location.hostname ":" "8080")
+  ;; TODO: Ugh, why is this like this?
+  (let [ws-host  (str js/window.location.hostname ":" (config/dato-port))
         ws-path  "/ws/index.html"
         app-dato (dato/new-dato ws-host ws-path conn {})]
     (atom {:dato app-dato})))

@@ -38,7 +38,9 @@
   (let [header [:head
                 [:link {:href "/css/base.css" :rel "stylesheet" :type "text/css"}]
                 [:link {:href "/css/index.css" :rel "stylesheet" :type "text/css"}]
-                [:title "Dato • TodoMVC"]]]
+                [:title "Dato • TodoMVC"]
+                [:script {:type "text/javascript"}
+                 (format "DatodoMVC = {}; DatodoMVC.config = JSON.parse('%s');" (json/encode {:dato-port (config/dato-port)}))]]]
     (h/html [:html
              header
              [:body
