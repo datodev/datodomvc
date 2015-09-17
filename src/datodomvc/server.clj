@@ -10,7 +10,7 @@
             [dato.lib.incoming :as dato-in]
             [dato.lib.server :as dato]
             [datodomvc.datomic.core :as db-conn]
-            [environ.core :as config]
+            [datodomvc.config :as config]
             [hiccup.core :as h]
             [immutant.codecs :as cdc]
             [ring.adapter.jetty :as jetty]
@@ -23,15 +23,12 @@
   (:import [java.net URLEncoder]
            [java.util UUID]))
 
-(def is-dev?
-  (config/env :is-dev))
-
 (defn build-name->entry-file [build-name]
   (case build-name
     "pseudo"     "/js/bin-pseudo/main.js"
     "production" "/js/bin/main.js"
     "dev"        "/js/bin-debug/main.js"
-    (if is-dev?
+    (if (config/dev?)
       "/js/bin-debug/main.js"
       "/js/bin/main.js")))
 
@@ -68,12 +65,12 @@
     (ring-defaults/wrap-defaults routes ring-defaults/api-defaults)
     (multipart/wrap-multipart-params routes)
     (gzip/wrap-gzip routes)
-    (if is-dev?
+    (if (config/dev?)
       (reload/wrap-reload routes)
       (basic-auth/wrap-basic-authentication routes authenticated?))))
 
-(defn run-web-server [& [port]]
-  (let [port (Integer. (or port (config/env :port) 10555))]
+(defn run-web-server []
+  (let [port (config/server-port)]
     (print "Starting web server on port" port ".\n")
     (jetty/run-jetty http-handler {:port port :join? false})))
 
@@ -90,10 +87,10 @@
   (dato/map->DatoServer {:routing-table #'dato-routes
                          :datomic-uri   db-conn/default-uri}))
 
-(defn run [& [port]]
+(defn run []
   (dato/start! handler {:server (var dato-server)
-                        :port   8080})
-  (run-web-server port))
+                        :port   (config/dato-port)})
+  (run-web-server))
 
 (defn init []
   (run))

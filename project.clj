@@ -10,7 +10,8 @@
                                     :creds :gpg}}
    :plugins [[lein-cljsbuild "1.0.6" :exclusions [org.clojure/clojurescript]]
              [lein-environ "1.0.0"]
-             [lein-less "1.7.5"]]
+             [lein-less "1.7.5"]
+             [lein-figwheel "0.3.9"]]
 
    :less {:source-paths ["src/main/less"]
           :target-path "target/public/css"}

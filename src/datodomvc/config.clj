@@ -11,3 +11,13 @@
 (defn nrepl-port []
   (when-let [port (env/env :nrepl-port)]
     (Integer/parseInt port)))
+
+(defn dato-port []
+  (if-let [port (env/env :dato-port)]
+    (Integer/parseInt port)
+    8080))
+
+(defn server-port []
+  (if-let [port (env/env :server-port)]
+    (Integer/parseInt port)
+    10555))
