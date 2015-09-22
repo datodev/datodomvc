@@ -78,12 +78,7 @@
                                               "src/cljs" "src/shared/"
                                               "src/shared/"
                                               "vendor/datascript/src" "vendor/datascript/bench/src"
-                                              ;; "vendor/dato/src/cljs" "vendor/dato/src/shared"
-                                              "/Users/daniel/projects/dato/src/shared"
-                                              "/Users/daniel/projects/dato/src/cljs"
-
-                                              "/Users/daniel/projects/talaria/src-cljs"
-
+                                              "vendor/dato/src/cljs" "vendor/dato/src/shared"
                                               "vendor/garden/src"]
                                :figwheel     true
                                :compiler     {:asset-path    "/js/bin-debug"
@@ -155,13 +150,8 @@
 
   :source-paths ["src/" "src/shared/"
                  "vendor/datascript/src" "vendor/datascript/bench/src"
-                 ;; "vendor/dato/src"       "vendor/dato/src/shared"
-                 ;; "vendor/dato/src/cljs"
-                 "/Users/daniel/projects/dato/src"
-                 "/Users/daniel/projects/dato/src/shared"
-                 "/Users/daniel/projects/dato/src/cljs"
-
-                 "/Users/daniel/projects/talaria/src-cljs"
+                 "vendor/dato/src"       "vendor/dato/src/shared"
+                 "vendor/dato/src/cljs"
                  "vendor/garden/src"]
 
   :target-path "target/%s"
