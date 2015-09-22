@@ -33,9 +33,10 @@
 
 (defonce ^:export app-state
   ;; TODO: Ugh, why is this like this?
-  (let [ws-host  (str js/window.location.hostname ":" (config/dato-port))
+  (let [ws-host  (str js/window.location.hostname)
+        ws-port  (config/dato-port)
         ws-path  "/ws/index.html"
-        app-dato (dato/new-dato ws-host ws-path conn {})]
+        app-dato (dato/new-dato ws-host ws-port ws-path conn {})]
     (atom {:dato app-dato})))
 
 (defn ^:export -main
