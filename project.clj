@@ -70,7 +70,7 @@
                  [ring-basic-authentication "1.0.5"]
                  [ring/ring-defaults "0.1.5"]
                  [sablono "0.3.4"]
-                 [talaria "0.1.1-SNAPSHOT"]]
+                 [talaria "0.1.3"]]
 
   :cljsbuild {:test-commands {"test" ["phantomjs" "env/test/js/unit-test.js" "env/test/unit-test.html"]}
               :builds        [{:id           "dev"
