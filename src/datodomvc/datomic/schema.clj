@@ -27,7 +27,8 @@
   [(attribute :migration/version :db.type/long)
    (attribute :dato/type :db.type/ref)
    (attribute :dato/guid :db.type/uuid :db/unique :db.unique/identity)
-   (attribute :tx/guid :db.type/uuid :db/unique :db.unique/identity)])
+   (attribute :tx/guid :db.type/uuid :db/unique :db.unique/identity)
+   (attribute :tx/session-id :db.type/string)])
 
 (def schema-2
   (vec
