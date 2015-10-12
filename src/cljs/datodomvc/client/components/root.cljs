@@ -22,7 +22,7 @@
   ([root selector]
    (delay-focus! root selector false))
   ([root selector select?]
-   (js/setTimeout #(let [input (utils/sel1 root selector)]
+   (js/setTimeout #(when-let [input (utils/sel1 root selector)]
                      (.focus input)
                      (when select?
                        (.select input))) 20)))
