@@ -7,7 +7,6 @@
             [datomic.api :as d]
             [dato.db.utils :as dsu]
             [dato.lib.debug :as dato-debug]
-            [dato.lib.incoming :as dato-in]
             [dato.lib.server :as dato]
             [datodomvc.datomic.core :as db-conn]
             [datodomvc.config :as config]
